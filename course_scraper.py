@@ -146,14 +146,9 @@ def run_scraper(category_name):
     scraped_content = []
 
     print("Initializing web driver")
-    op = webdriver.ChromeOptions()
-    op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    op = Options()
     op.add_argument("--headless")
-    op.add_argument("--no-sandbox")
-    op.add_argument('--disable-gpu')
-    op.add_argument('--single-process')
-    op.add_argument("--disable-dev-sh-usage")
-    driver = webdriver.Chrome(os.environ.get("CHROMEDRIVER_PATH"), options=op)
+    driver = webdriver.Firefox(options=op)
     driver.set_window_size(800, 600)
     print("Web driver initialized")
 
