@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Webscraper task</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+<h1>The most awesome Coursea webscraper</h1>
+<p>The script works, but will most likely crash with an "unknown error", this is due to Heroku's memory limitation's. I recommend trying to run the script on localhost, you can find the code <a href="">here</a></p>
+<p>Category input</p>
+<input type="text" id="category">
+<input type="button" value="Start scrapping" onclick="webScrape()">
+</div>
+<div id="loading"  style="display: none;">
+  <img src="/static/images/loading-gif.gif" alt="">
+  <p>Processing can take several minutes depeding on the amount of content and processing speed, average time: ~10 minutes</p>
+</div>
+<p id="result"></p>
+</body>
+</html>
+<script>
+
+  function webScrape() {
+    categoryInput = $('#category').val();
+    if (categoryInput != '') {
+      $('#result').text('');
+      $('#loading').css('display', 'unset');
+      $.post('/scrape/' + categoryInput, function(data, status) {
+        $('#loading').css('display', 'none');
+        $('#result').text(data);
+      })
+    } else {
+      alert("Category required!")
+    }
+  }
+
+</script>
